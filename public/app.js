@@ -1,26 +1,40 @@
 let item = {};
 
-let baseProperties = {
+let type1Properties = {
     fire: {minValue: 10, maxValue: 101, name: 'health regen'},
     water: {minValue: 10, maxValue: 101, name: 'shield'},
     air: {minValue: 10, maxValue: 101, name: 'shield regen'},
     earth: {minValue: 10, maxValue: 101, name: 'health'},
 };
 
-let valueBonus = 50;
+let secondTierValueBonus = 50;
 
-let createItemProperty = (source, bonus, maxMult) => {
-    let property = baseProperties[source];
+let type2Properties = {
+    fire: {minValue: 10, maxValue: 101, name: 'stamina regen'},
+    water: {minValue: 10, maxValue: 101, name: 'reserve'},
+    air: {minValue: 10, maxValue: 101, name: 'reserve regen'},
+    earth: {minValue: 10, maxValue: 101, name: 'stamina'},
+};
+
+let additionalGlowValueBonus = .1;
+
+let createPropertyType1 = (source, bonus, maxMult) => {
+    let property = type1Properties[source];
     return {name: property.name, value: bonus + randInt(property.minValue, property.maxValue * maxMult), source: source};
+};
+
+let createPropertyType2 = (source, maxMult) => {
+    let property = type2Properties[source];
+    return {name: property.name, value: randInt(property.minValue, property.maxValue * maxMult), source: source};
 };
 
 let createBaseProperty = (elements) => {
     if (elements.length === 1)
-        return createItemProperty(elements[0], 0, 1);
+        return createPropertyType1(elements[0], 0, 1);
 
     else {
         let index = randInt(0, 2);
-        return createItemProperty(elements[index], valueBonus, 1);
+        return createPropertyType1(elements[index], secondTierValueBonus, 1);
     }
 };
 
@@ -29,10 +43,10 @@ let createPrimaryProperty = (glows) => {
     let elements = glows[index].elements;
 
     if (elements.length === 1)
-        return createItemProperty(elements[0], 0, .5);
+        return createPropertyType1(elements[0], 0, .5);
 
     else if (elements[0] === elements[1])
-        return createItemProperty(elements[0], 0, 1);
+        return createPropertyType1(elements[0], 0, 1);
 
     else {
         let index = randInt(0, 2);
@@ -42,8 +56,17 @@ let createPrimaryProperty = (glows) => {
             else if (item.property[1].source === elements[1])
                 index = 0;
 
-        return createItemProperty(elements[index], 0, .5);
+        return createPropertyType1(elements[index], 0, .5);
     }
+};
+
+let createSecondaryProperty = (glows) => {
+    let index = randInt(0, glows.length);
+    let elements = glows[index].elements;
+    index = randInt(0, elements.length);
+    let multiply = 1 + ((glows.length - 1) * additionalGlowValueBonus);
+
+    return createPropertyType2(elements[index], multiply);
 };
 
 let init = () => {
@@ -111,7 +134,18 @@ let stepPrimary = () => {
 };
 
 let stepSecondary = () => {
+    if (item.step !== 3 && item.step !== 4)
+        return;
+    
+    let glows = controller.getGlows();
 
+    if (glows.length === 0)
+        return;
+
+    item.property[item.step] = createSecondaryProperty(glows);
+
+    item.step++;
+    controller.updateProperties(item);
 };
 
 let stepEnhance = () => {
@@ -128,3 +162,6 @@ window.onload = init;
  secondary 1 and 2 rolls rolls of secondary attributes, possible outcomes based on which glows, value range based on # of glows  
  secondary clear removes secondary enchants and reduces enchant-ability by 10 
  */
+
+// enchantability
+// initial imbue step (durability, enchantability, free reset, higher primary rolls) 
