@@ -63,7 +63,14 @@ let createPrimaryProperty = (glows) => {
 let createSecondaryProperty = (glows) => {
     let index = randInt(0, glows.length);
     let elements = glows[index].elements;
+
     index = randInt(0, elements.length);
+    if (item.step === 4 && elements.length > 1)
+        if (item.property[3].source === elements[0])
+            index = 1;
+        else if (item.property[3].source === elements[1])
+            index = 0;
+
     let multiply = 1 + ((glows.length - 1) * additionalGlowValueBonus);
 
     return createPropertyType2(elements[index], multiply);
@@ -136,11 +143,20 @@ let stepPrimary = () => {
 let stepSecondary = () => {
     if (item.step !== 3 && item.step !== 4)
         return;
-    
+
     let glows = controller.getGlows();
 
     if (glows.length === 0)
         return;
+
+    if (item.step === 4) {
+        let repeat = _.find(glows, (glow) => {
+            let elements = glow.elements;
+            return (elements.length === 1 || elements[0] === elements[1]) && item.property[3].source === elements[0]
+        });
+        if (repeat)
+            return;
+    }
 
     item.property[item.step] = createSecondaryProperty(glows);
 
@@ -163,5 +179,9 @@ window.onload = init;
  secondary clear removes secondary enchants and reduces enchant-ability by 10 
  */
 
+// avoid repeats in secondary
+// enhance
 // enchantability
-// initial imbue step (durability, enchantability, free reset, higher primary rolls) 
+// initial imbue step (durability, enchantability, free reset, higher primary rolls)
+// reseting
+// helper messages for error returns
