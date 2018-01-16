@@ -1,19 +1,39 @@
 let item = {};
 
 let type1Properties = {
+    earth: {minValue: 10, maxValue: 101, name: 'health'},
     fire: {minValue: 10, maxValue: 101, name: 'health regen'},
     water: {minValue: 10, maxValue: 101, name: 'shield'},
     air: {minValue: 10, maxValue: 101, name: 'shield regen'},
-    earth: {minValue: 10, maxValue: 101, name: 'health'},
 };
 
 let secondTierValueBonus = 50;
 
 let type2Properties = {
-    fire: {minValue: 10, maxValue: 101, name: 'stamina regen'},
-    water: {minValue: 10, maxValue: 101, name: 'reserve'},
-    air: {minValue: 10, maxValue: 101, name: 'reserve regen'},
-    earth: {minValue: 10, maxValue: 101, name: 'stamina'},
+    helmet: {
+        earth: {minValue: 10, maxValue: 101, name: 'stamina'},
+        fire: {minValue: 10, maxValue: 101, name: 'stamina regen'},
+        water: {minValue: 10, maxValue: 101, name: 'reserve'},
+        air: {minValue: 10, maxValue: 101, name: 'reserve regen'},
+    },
+    gloves: {
+        earth: {minValue: 10, maxValue: 101, name: 'attack power'},
+        fire: {minValue: 10, maxValue: 101, name: 'attack speed'},
+        water: {minValue: 10, maxValue: 101, name: 'accuracy'},
+        air: {minValue: 10, maxValue: 101, name: 'range'},
+    },
+    boots: {
+        earth: {minValue: 10, maxValue: 101, name: 'move speed'},
+        fire: {minValue: 10, maxValue: 101, name: 'jump speed'},
+        water: {minValue: 10, maxValue: 101, name: 'jet spower'},
+        air: {minValue: 10, maxValue: 101, name: 'fly speed'},
+    },
+    body: {
+        earth: {minValue: 10, maxValue: 101, name: 'health'},
+        fire: {minValue: 10, maxValue: 101, name: 'health regen'},
+        water: {minValue: 10, maxValue: 101, name: 'shield'},
+        air: {minValue: 10, maxValue: 101, name: 'shield regen'},
+    },
 };
 
 let additionalGlowValueBonus = .1;
@@ -24,7 +44,7 @@ let createPropertyType1 = (source, bonus, maxMult) => {
 };
 
 let createPropertyType2 = (source, maxMult) => {
-    let property = type2Properties[source];
+    let property = type2Properties[item.type][source];
     return {name: property.name, value: randInt(property.minValue, property.maxValue * maxMult * item.enchantability / 100), source: source};
 };
 
@@ -89,6 +109,7 @@ let init = () => {
 let stepReset = () => {
     item.step = 0;
     item.enchantability = 100;
+    item.type = 'helmet';
     item.property = [
         {name: '', value: 0},
         {name: '', value: 0},
@@ -105,6 +126,8 @@ let stepBase = () => {
         controller.setHelpText('Item must have no properties');
         return;
     }
+
+    item.type = controller.getItemTypeText();
 
     let glows = controller.getGlows();
     if (glows.length !== 1) {
@@ -225,6 +248,6 @@ let stepEnhanceReset = () => {
 
 window.onload = init;
 
+// todo
 // enhance
 // initial imbue step (durability, enchantability, free reset, higher primary rolls)
-// item types

@@ -2,6 +2,8 @@ let controller = (() => {
     let updateProperties = (item) => {
         setHelpText('');
 
+        itemType.innerText = item.type;
+
         enchantability.innerText = item.enchantability;
 
         let properties = [property1, property2, property3, property4, property5, property6];
@@ -11,6 +13,10 @@ let controller = (() => {
             else
                 property.innerText = item.property[index].name + ' ' + item.property[index].value;
         });
+    };
+
+    let setHelpText = (text) => {
+        helpText.innerText = text;
     };
 
     let getGlows = () => {
@@ -38,13 +44,14 @@ let controller = (() => {
         return glows;
     };
 
-    let setHelpText = (text) => {
-        helpText.innerText = text;
+    let getItemTypeText = () => {
+        return itemTypeSelect.selectedOptions[0] && itemTypeSelect.selectedOptions[0].value;
     };
 
     return {
         updateProperties: updateProperties,
-        getGlows: getGlows,
         setHelpText: setHelpText,
+        getGlows: getGlows,
+        getItemTypeText: getItemTypeText,
     };
 })();

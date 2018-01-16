@@ -79,13 +79,13 @@
 
     <div class="row" style="margin-top:20px">
         <div class="col-2">
-            <!--<select size="5">-->
-            <!--<option value="helmet">helmet</option>-->
-            <!--<option value="gloves">gloves</option>-->
-            <!--<option value="boots">boots</option>-->
-            <!--<option value="body">body</option>-->
-            <!--<option value="weapon">weapon</option>-->
-            <!--</select>-->
+            <select size="5" id="itemTypeSelect">
+                <option value="helmet" selected>helmet</option>
+                <option value="gloves">gloves</option>
+                <option value="boots">boots</option>
+                <option value="body">body</option>
+                <!--<option value="weapon">weapon</option>-->
+            </select>
         </div>
 
         <div class="col-2">
@@ -132,6 +132,7 @@
     </div>
 
     <div class="row" style="margin-top:20px">
+        <span class="col-12">Item Type: <span id="itemType" style="margin-left:40px"></span></span>
         <span class="col-12">Enchantability: <span id="enchantability" style="margin-left:40px"></span></span>
         <span class="col-12">Property 1: <span id="property1" style="margin-left:40px"></span></span>
         <span class="col-12">Property 2: <span id="property2" style="margin-left:40px"></span></span>
