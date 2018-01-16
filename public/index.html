@@ -1,34 +1,31 @@
+<link rel="stylesheet" href="scripts/bootstrap/dist/css/bootstrap.css">
 <script src="scripts/underscore/underscore.js"></script>
+<script src="scripts/jquery/dist/jquery.js"></script>
+<script src="scripts/tether/dist/js/tether.js"></script>
+<script src="scripts/bootstrap/dist/js/bootstrap.js"></script>
+
 <script src="rand.js"></script>
-<script src="geometry.js"></script>
-<script src="intersectionFinder.js"></script>
-<script src="houseGenerator.js"></script>
-<script src="astar.js"></script>
-<script src="canvas.js"></script>
 <script src="controller.js"></script>
 <script src="app.js"></script>
 
-<div style="margin-top:5px;">
-    <p style="font-family:monospace;">
-        <span>Moveable Map Locations: <span id="mmlSpan"></span></span>
-        <span style="margin-left:50px;">Important Map Nodes: <span id="imnSpan"></span></span>
-        <span style="margin-left:50px;">Ratio: <span id="ratioSpan"></span></span>
-    </p>
-    <button onclick="emptyMap()">empty map</button>
-    <button onclick="randomMap()">random map</button>
-    <button onclick="houseMap()">random dungeon</button>
-    <button onclick="setDraw(start)">set start</button>
-    <button onclick="setDraw(goal)">set goal</button>
-    <button onclick="toggleEndpointOverlay()">toggle endpoint overlay</button>
-    <button onclick="toggleGraphOverlay()">toggle graph overlay</button>
-    <button onclick="togglePathOverlay()">toggle path overlay</button>
-</div>
+<div class="row">
 
-<div style="margin-top:5px">
-    <canvas id="myCanvas"
-        onmousedown="handleMouseDown(event.offsetX, event.offsetY)"
-        onmouseup="handleMouseUp()"
-        onmousemove="handleMouseMove(event.offsetX, event.offsetY)"
-        style="border: 1px solid;">
-    </canvas>
+    <div class="col-3">
+        <select>
+            <option value="helmet">helmet</option>
+            <option value="gloves">gloves</option>
+            <option value="boots">boots</option>
+            <option value="body">body</option>
+            <option value="weapon">weapon</option>
+        </select>
+    </div>
+
+    <div class="col-3">
+        text1
+    </div>
+
+    <div class="col-3">
+        text1
+    </div>
+
 </div>
