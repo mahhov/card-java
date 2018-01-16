@@ -8,24 +8,123 @@
 <script src="controller.js"></script>
 <script src="app.js"></script>
 
-<div class="row">
-
-    <div class="col-3">
-        <select>
-            <option value="helmet">helmet</option>
-            <option value="gloves">gloves</option>
-            <option value="boots">boots</option>
-            <option value="body">body</option>
-            <option value="weapon">weapon</option>
-        </select>
+<div style="margin:30px">
+    <div class="row">
+        <div class="col-4">
+            <input id="glowFire1" type="checkbox">
+            <label style="margin-left:5px">glow fire-1</label>
+        </div>
+        <div class="col-4">
+            <input id="glowWater1" type="checkbox">
+            <label style="margin-left:5px">glow water-1</label>
+        </div>
+        <div class="col-4">
+            <input id="glowAir1" type="checkbox">
+            <label style="margin-left:5px">glow air-1</label>
+        </div>
+        <div class="col-4">
+            <input id="glowEarth1" type="checkbox">
+            <label style="margin-left:5px">glow earth-1</label>
+        </div>
+        <div class="col-4">
+            <input id="glowFireWater" type="checkbox">
+            <label style="margin-left:5px">glow fire-water</label>
+        </div>
+        <div class="col-4">
+            <input id="glowFireAir" type="checkbox">
+            <label style="margin-left:5px">glow fire-air</label>
+        </div>
+        <div class="col-4">
+            <input id="glowFireEarth" type="checkbox">
+            <label style="margin-left:5px">glow fire-earth</label>
+        </div>
+        <div class="col-4">
+            <input id="glowWaterAir" type="checkbox">
+            <label style="margin-left:5px">glow water-air</label>
+        </div>
+        <div class="col-4">
+            <input id="glowWaterEarth" type="checkbox">
+            <label style="margin-left:5px">glow water-earth</label>
+        </div>
+        <div class="col-4">
+            <input id="glowAirEarth" type="checkbox">
+            <label style="margin-left:5px">glow air-earth</label>
+        </div>
+        <div class="col-4">
+            <input id="glowFire2" type="checkbox">
+            <label style="margin-left:5px">glow fire-2</label>
+        </div>
+        <div class="col-4">
+            <input id="glowWater2" type="checkbox">
+            <label style="margin-left:5px">glow water-2</label>
+        </div>
+        <div class="col-4">
+            <input id="glowAir2" type="checkbox">
+            <label style="margin-left:5px">glow air-2</label>
+        </div>
+        <div class="col-4">
+            <input id="glowEarth2" type="checkbox">
+            <label style="margin-left:5px">glow earth-2</label>
+        </div>
     </div>
 
-    <div class="col-3">
-        text1
+    <div class="row" style="margin-top:20px">
+        <div class="col-2">
+            <select size="5">
+                <option value="helmet">helmet</option>
+                <option value="gloves">gloves</option>
+                <option value="boots">boots</option>
+                <option value="body">body</option>
+                <option value="weapon">weapon</option>
+            </select>
+        </div>
+
+        <div class="col-2">
+            base
+        </div>
+
+        <div class="col-2">
+            primary
+        </div>
+
+        <div class="col-2">
+            secondary
+        </div>
+
+        <div class="col-2">
+            enhance
+        </div>
     </div>
 
-    <div class="col-3">
-        text1
+    <div class="row" style="margin-top:20px">
+        <div class="col-2">
+            <button onclick="stepItem()">Rest</button>
+        </div>
+
+        <div class="col-2">
+            <button onclick="stepBase()">Next</button>
+        </div>
+
+        <div class="col-2">
+            <button onclick="stepPrimary()">Next</button>
+        </div>
+
+        <div class="col-2">
+            <button onclick="stepSecondary()">Next</button>
+        </div>
+
+        <div class="col-2">
+            <button onclick="stepEnhance()">Next</button>
+        </div>
     </div>
 
+    <div class="row" style="margin-top:20px">
+        <span class="col-12" id="property1"></span>
+        <span class="col-12" id="property2"></span>
+        <span class="col-12" id="property3"></span>
+        <span class="col-12" id="property4"></span>
+        <span class="col-12" id="property5"></span>
+        <span class="col-12" id="property6"></span>
+        <span class="col-12" id="property7"></span>
+    </div>
 </div>
