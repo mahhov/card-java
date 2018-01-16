@@ -1,6 +1,9 @@
 let controller = (() => {
     let updateProperties = (item) => {
         setHelpText('');
+
+        enchantability.innerText = item.enchantability;
+
         let properties = [property1, property2, property3, property4, property5, property6];
         _.each(properties, (property, index) => {
             if (item.property[index].value === 0)

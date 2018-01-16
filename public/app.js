@@ -25,7 +25,7 @@ let createPropertyType1 = (source, bonus, maxMult) => {
 
 let createPropertyType2 = (source, maxMult) => {
     let property = type2Properties[source];
-    return {name: property.name, value: randInt(property.minValue, property.maxValue * maxMult), source: source};
+    return {name: property.name, value: randInt(property.minValue, property.maxValue * maxMult * item.enchantability / 100), source: source};
 };
 
 let createBaseProperty = (elements) => {
@@ -112,6 +112,15 @@ let stepBase = () => {
     controller.updateProperties(item);
 };
 
+let stepBaseReset = () => {
+    if (item.step !== 1) {
+        controller.setHelpText('Item must have 1 property');
+        return;
+    }
+
+    stepReset();
+};
+
 let stepPrimary = () => {
     if (item.step !== 1 && item.step !== 2) {
         controller.setHelpText('Item must have 1 or 2 properties');
@@ -139,6 +148,20 @@ let stepPrimary = () => {
     item.property[item.step] = createPrimaryProperty(glows);
 
     item.step++;
+    controller.updateProperties(item);
+};
+
+let stepPrimaryReset = () => {
+    if (item.step !== 2 && item.step !== 3) {
+        controller.setHelpText('Item must have 2 or 3 properties');
+        return;
+    }
+
+    item.property[1].value = 0;
+    item.property[2].value = 0;
+    item.enchantability -= 5;
+
+    item.step = 1;
     controller.updateProperties(item);
 };
 
@@ -172,14 +195,30 @@ let stepSecondary = () => {
     controller.updateProperties(item);
 };
 
+let stepSecondaryReset = () => {
+    if (item.step !== 4 && item.step !== 5) {
+        controller.setHelpText('Item must have 4 or 5 properties');
+        return;
+    }
+
+    item.property[3].value = 0;
+    item.property[4].value = 0;
+    item.enchantability -= 10;
+
+    item.step = 3;
+    controller.updateProperties(item);
+};
+
 let stepEnhance = () => {
+
+};
+
+let stepEnhanceReset = () => {
 
 };
 
 window.onload = init;
 
 // enhance
-// enchantability
 // initial imbue step (durability, enchantability, free reset, higher primary rolls)
-// reseting
 // item types
