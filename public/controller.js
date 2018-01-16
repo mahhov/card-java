@@ -1,5 +1,6 @@
 let controller = (() => {
     let updateProperties = (item) => {
+        setHelpText('');
         let properties = [property1, property2, property3, property4, property5, property6];
         _.each(properties, (property, index) => {
             if (item.property[index].value === 0)
@@ -34,8 +35,13 @@ let controller = (() => {
         return glows;
     };
 
+    let setHelpText = (text) => {
+        helpText.innerText = text;
+    };
+
     return {
         updateProperties: updateProperties,
         getGlows: getGlows,
+        setHelpText: setHelpText,
     };
 })();

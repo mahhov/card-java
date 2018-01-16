@@ -77,11 +77,12 @@ let createSecondaryProperty = (glows) => {
 };
 
 let init = () => {
-    resetItem();
+    stepReset();
 };
 
-let resetItem = () => {
+let stepReset = () => {
     item.step = 0;
+    item.enchantability = 100;
     item.property = [
         {name: '', value: 0},
         {name: '', value: 0},
@@ -90,48 +91,49 @@ let resetItem = () => {
         {name: '', value: 0},
         {name: '', value: 0},
         {name: '', value: 0}];
-};
-
-let stepItem = () => {
-    resetItem();
     controller.updateProperties(item);
 };
 
 let stepBase = () => {
-    if (item.step !== 0)
+    if (item.step !== 0) {
+        controller.setHelpText('Item must have no properties');
         return;
+    }
 
     let glows = controller.getGlows();
-
-    if (glows.length > 1)
+    if (glows.length !== 1) {
+        controller.setHelpText('Exactly 1 glow must be selected');
         return;
+    }
 
-    if (glows.length === 0)
-        item.property[0].name = 'none';
-
-    else
-        item.property[0] = createBaseProperty(glows[0].elements);
+    item.property[0] = createBaseProperty(glows[0].elements);
 
     item.step++;
     controller.updateProperties(item);
 };
 
 let stepPrimary = () => {
-    if (item.step !== 1 && item.step !== 2)
+    if (item.step !== 1 && item.step !== 2) {
+        controller.setHelpText('Item must have 1 or 2 properties');
         return;
+    }
 
     let glows = controller.getGlows();
 
-    if (glows.length !== 3)
+    if (glows.length !== 3) {
+        controller.setHelpText('Exactly 3 glow must be selected');
         return;
+    }
 
     if (item.step === 2) {
         let repeat = _.find(glows, (glow) => {
             let elements = glow.elements;
             return (elements.length === 1 || elements[0] === elements[1]) && item.property[1].source === elements[0]
         });
-        if (repeat)
+        if (repeat) {
+            controller.setHelpText('Item already has a primary property of ' + item.property[1].source);
             return;
+        }
     }
 
     item.property[item.step] = createPrimaryProperty(glows);
@@ -141,21 +143,27 @@ let stepPrimary = () => {
 };
 
 let stepSecondary = () => {
-    if (item.step !== 3 && item.step !== 4)
+    if (item.step !== 3 && item.step !== 4) {
+        controller.setHelpText('Item must have 3 or 4 properties');
         return;
+    }
 
     let glows = controller.getGlows();
 
-    if (glows.length === 0)
+    if (glows.length === 0) {
+        controller.setHelpText('At least 1 glow must be selected');
         return;
+    }
 
     if (item.step === 4) {
         let repeat = _.find(glows, (glow) => {
             let elements = glow.elements;
             return (elements.length === 1 || elements[0] === elements[1]) && item.property[3].source === elements[0]
         });
-        if (repeat)
+        if (repeat) {
+            controller.setHelpText('Item already has a primary property of ' + item.property[3].source);
             return;
+        }
     }
 
     item.property[item.step] = createSecondaryProperty(glows);
@@ -170,18 +178,8 @@ let stepEnhance = () => {
 
 window.onload = init;
 
-/*
- item type determines secondary attributes possible
- base gives rolls 10-100 based on which glow for tier 1, 60-150 for tier 2 or hybrid (chosen randomly)
- primary 1 and 2 rolls 10-50 (1st glow) or 10-100 (2nd glow) or 10-50 or random glow (hybrid glow) of randomly chosen from 3 glows
- primary clear removes primary enchants and reduces enchant-ability by 5 
- secondary 1 and 2 rolls rolls of secondary attributes, possible outcomes based on which glows, value range based on # of glows  
- secondary clear removes secondary enchants and reduces enchant-ability by 10 
- */
-
-// avoid repeats in secondary
 // enhance
 // enchantability
 // initial imbue step (durability, enchantability, free reset, higher primary rolls)
 // reseting
-// helper messages for error returns
+// item types
