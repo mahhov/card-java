@@ -53,13 +53,13 @@ let init = () => {
 let resetItem = () => {
     item.step = 0;
     item.property = [
-        {name: '-', value: 0},
-        {name: '-', value: 0},
-        {name: '-', value: 0},
-        {name: '-', value: 0},
-        {name: '-', value: 0},
-        {name: '-', value: 0},
-        {name: '-', value: 0}];
+        {name: '', value: 0},
+        {name: '', value: 0},
+        {name: '', value: 0},
+        {name: '', value: 0},
+        {name: '', value: 0},
+        {name: '', value: 0},
+        {name: '', value: 0}];
 };
 
 let stepItem = () => {

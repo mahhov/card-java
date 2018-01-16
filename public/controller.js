@@ -2,7 +2,10 @@ let controller = (() => {
     let updateProperties = (item) => {
         let properties = [property1, property2, property3, property4, property5, property6];
         _.each(properties, (property, index) => {
-            property.innerText = item.property[index].name + ' ' + item.property[index].value;
+            if (item.property[index].value === 0)
+                property.innerText = '';
+            else
+                property.innerText = item.property[index].name + ' ' + item.property[index].value;
         });
     };
 
