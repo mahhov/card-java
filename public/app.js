@@ -76,6 +76,12 @@ let createSecondaryProperty = (glows) => {
     return createPropertyType2(elements[index], multiply);
 };
 
+let decreaseEnchantability = (amount) => {
+    item.enchantability -= amount;
+    if (item.enchantability < 10)
+        item.enchantability = 10;
+};
+
 let init = () => {
     stepReset();
 };
@@ -159,7 +165,7 @@ let stepPrimaryReset = () => {
 
     item.property[1].value = 0;
     item.property[2].value = 0;
-    item.enchantability -= 5;
+    decreaseEnchantability(5);
 
     item.step = 1;
     controller.updateProperties(item);
@@ -203,7 +209,7 @@ let stepSecondaryReset = () => {
 
     item.property[3].value = 0;
     item.property[4].value = 0;
-    item.enchantability -= 10;
+    decreaseEnchantability(10);
 
     item.step = 3;
     controller.updateProperties(item);
