@@ -1,9 +1,4 @@
 let controller = (() => {
-    let setProperty = (index, value) => {
-        let properties = [property1, property2, property3, property4, property5, property6];
-        properties[index].innerText = value;
-    };
-
     let updateProperties = (item) => {
         let properties = [property1, property2, property3, property4, property5, property6];
         _.each(properties, (property, index) => {
