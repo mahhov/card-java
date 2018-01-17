@@ -1,6 +1,6 @@
 let controller = (() => {
     let updateProperties = (item) => {
-        setHelpText('');
+        setErrorText('');
 
         itemType.innerText = item.type;
 
@@ -15,8 +15,16 @@ let controller = (() => {
         });
     };
 
-    let setHelpText = (text) => {
-        helpText.innerText = text;
+    let setErrorText = (text) => {
+        errorText.innerText = text;
+    };
+
+    let setHelpText = (texts) => {
+        let concatTexts = '';
+        _.each(texts, (text) => {
+            concatTexts += text + '\n';
+        });
+        helpText.innerText = concatTexts;
     };
 
     let getGlows = () => {
@@ -50,6 +58,7 @@ let controller = (() => {
 
     return {
         updateProperties: updateProperties,
+        setErrorText: setErrorText,
         setHelpText: setHelpText,
         getGlows: getGlows,
         getItemTypeText: getItemTypeText,

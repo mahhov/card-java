@@ -112,10 +112,27 @@ let init = () => {
     stepReset();
 };
 
+let setHelpText = () => {
+    let helpText = [];
+    
+    helpText.push('@primary');
+    _.each(type1Properties, (property, index) => {
+        helpText.push(index + ' -> ' + property.name);
+    });
+    
+    helpText.push('');
+    helpText.push('@secondary');
+    _.each(type2Properties[item.type], (property, index) => {
+        helpText.push(index + ' -> ' + property.name);
+    });
+
+    controller.setHelpText(helpText);
+};
+
 let stepReset = () => {
     item.step = 0;
     item.enchantability = 100;
-    item.type = 'helmet';
+    item.type = controller.getItemTypeText();
     item.property = [
         {name: '', value: 0},
         {name: '', value: 0},
@@ -125,11 +142,12 @@ let stepReset = () => {
         {name: '', value: 0},
         {name: '', value: 0}];
     controller.updateProperties(item);
+    setHelpText();
 };
 
 let stepBase = () => {
     if (item.step !== 0) {
-        controller.setHelpText('Item must have no properties');
+        controller.setErrorText('Item must have no properties');
         return;
     }
 
@@ -137,7 +155,7 @@ let stepBase = () => {
 
     let glows = controller.getGlows();
     if (glows.length !== 1) {
-        controller.setHelpText('Exactly 1 glow must be selected');
+        controller.setErrorText('Exactly 1 glow must be selected');
         return;
     }
 
@@ -145,11 +163,12 @@ let stepBase = () => {
 
     item.step++;
     controller.updateProperties(item);
+    setHelpText();
 };
 
 let stepBaseReset = () => {
     if (item.step !== 1) {
-        controller.setHelpText('Item must have 1 property');
+        controller.setErrorText('Item must have 1 property');
         return;
     }
 
@@ -158,14 +177,14 @@ let stepBaseReset = () => {
 
 let stepPrimary = () => {
     if (item.step !== 1 && item.step !== 2) {
-        controller.setHelpText('Item must have 1 or 2 properties');
+        controller.setErrorText('Item must have 1 or 2 properties');
         return;
     }
 
     let glows = controller.getGlows();
 
     if (glows.length !== 3) {
-        controller.setHelpText('Exactly 3 glow must be selected');
+        controller.setErrorText('Exactly 3 glow must be selected');
         return;
     }
 
@@ -175,7 +194,7 @@ let stepPrimary = () => {
             return (elements.length === 1 || elements[0] === elements[1]) && item.property[1].source === elements[0]
         });
         if (repeat) {
-            controller.setHelpText('Item already has a primary property of ' + item.property[1].source);
+            controller.setErrorText('Item already has a primary property of ' + item.property[1].source);
             return;
         }
     }
@@ -188,7 +207,7 @@ let stepPrimary = () => {
 
 let stepPrimaryReset = () => {
     if (item.step !== 2 && item.step !== 3) {
-        controller.setHelpText('Item must have 2 or 3 properties');
+        controller.setErrorText('Item must have 2 or 3 properties');
         return;
     }
 
@@ -202,14 +221,14 @@ let stepPrimaryReset = () => {
 
 let stepSecondary = () => {
     if (item.step !== 3 && item.step !== 4) {
-        controller.setHelpText('Item must have 3 or 4 properties');
+        controller.setErrorText('Item must have 3 or 4 properties');
         return;
     }
 
     let glows = controller.getGlows();
 
     if (glows.length === 0) {
-        controller.setHelpText('At least 1 glow must be selected');
+        controller.setErrorText('At least 1 glow must be selected');
         return;
     }
 
@@ -219,7 +238,7 @@ let stepSecondary = () => {
             return (elements.length === 1 || elements[0] === elements[1]) && item.property[3].source === elements[0]
         });
         if (repeat) {
-            controller.setHelpText('Item already has a primary property of ' + item.property[3].source);
+            controller.setErrorText('Item already has a primary property of ' + item.property[3].source);
             return;
         }
     }
@@ -232,7 +251,7 @@ let stepSecondary = () => {
 
 let stepSecondaryReset = () => {
     if (item.step !== 4 && item.step !== 5) {
-        controller.setHelpText('Item must have 4 or 5 properties');
+        controller.setErrorText('Item must have 4 or 5 properties');
         return;
     }
 
@@ -246,7 +265,7 @@ let stepSecondaryReset = () => {
 
 let stepEnhance = () => {
     if (item.step !== 5 && item.step !== 6) {
-        controller.setHelpText('Item must have 5 or 6 properties');
+        controller.setErrorText('Item must have 5 or 6 properties');
         return;
     }
 
@@ -258,7 +277,7 @@ let stepEnhance = () => {
 
 let stepEnhanceReset = () => {
     if (item.step !== 6 && item.step !== 7) {
-        controller.setHelpText('Item must have 6 or 7 properties');
+        controller.setErrorText('Item must have 6 or 7 properties');
         return;
     }
 
