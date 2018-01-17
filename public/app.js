@@ -283,7 +283,7 @@ let stepEnhanceReset = () => {
 
     item.property[5].value = 0;
     item.property[6].value = 0;
-    decreaseEnchantability(20);
+    decreaseEnchantability(10);
 
     item.step = 5;
     controller.updateProperties(item);
