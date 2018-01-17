@@ -6,10 +6,10 @@ let controller = (() => {
 
         enchantability.innerText = item.enchantability;
 
-        let properties = [property1, property2, property3, property4, property5, property6];
+        let properties = [property1, property2, property3, property4, property5, property6, property7];
         _.each(properties, (property, index) => {
             if (item.property[index].value === 0)
-                property.innerText = '';
+                property.innerText = '_';
             else
                 property.innerText = item.property[index].name + ' ' + item.property[index].value;
         });

@@ -7,8 +7,6 @@ let type1Properties = {
     air: {minValue: 10, maxValue: 101, name: 'shield regen'},
 };
 
-let secondTierValueBonus = 50;
-
 let type2Properties = {
     helmet: {
         earth: {minValue: 10, maxValue: 101, name: 'stamina'},
@@ -36,7 +34,9 @@ let type2Properties = {
     },
 };
 
+let secondTierValueBonus = 50;
 let additionalGlowValueBonus = .1;
+let enhanceMultiply = 3;
 
 let createPropertyType1 = (source, bonus, maxMult) => {
     let property = type1Properties[source];
@@ -94,6 +94,12 @@ let createSecondaryProperty = (glows) => {
     let multiply = 1 + ((glows.length - 1) * additionalGlowValueBonus);
 
     return createPropertyType2(elements[index], multiply);
+};
+
+let createEnhanceProperty = () => {
+    let index = randInt(0, 4);
+    let elements = ['earth', 'fire', 'water', 'air'];
+    return createPropertyType2(elements[index], enhanceMultiply);
 };
 
 let decreaseEnchantability = (amount) => {
@@ -239,15 +245,29 @@ let stepSecondaryReset = () => {
 };
 
 let stepEnhance = () => {
+    if (item.step !== 5 && item.step !== 6) {
+        controller.setHelpText('Item must have 5 or 6 properties');
+        return;
+    }
 
+    item.property[item.step] = createEnhanceProperty();
+
+    item.step++;
+    controller.updateProperties(item);
 };
 
 let stepEnhanceReset = () => {
+    if (item.step !== 6 && item.step !== 7) {
+        controller.setHelpText('Item must have 6 or 7 properties');
+        return;
+    }
 
+    item.property[5].value = 0;
+    item.property[6].value = 0;
+    decreaseEnchantability(20);
+
+    item.step = 5;
+    controller.updateProperties(item);
 };
 
 window.onload = init;
-
-// todo
-// enhance
-// initial imbue step (durability, enchantability, free reset, higher primary rolls)
