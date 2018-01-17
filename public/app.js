@@ -36,7 +36,7 @@ let type2Properties = {
 
 let secondTierValueBonus = 50;
 let additionalGlowValueBonus = .1;
-let enhanceMultiply = 3;
+let enhanceMultiply = 1;
 
 let createPropertyType1 = (source, bonus, maxMult) => {
     let property = type1Properties[source];
