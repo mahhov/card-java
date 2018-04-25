@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="TouchControl">
+    <output-path>$PROJECT_DIR$/out/artifacts/TouchControl</output-path>
+    <root id="archive" name="svnreplicate.jar">
+      <element id="module-output" name="svnreplicate" />
+    </root>
+  </artifact>
+</component>
