@@ -1,0 +1,3 @@
+0_ 0_ done
+0.36_ 1.26_ op amp reversed
+1.26_ 0.36_ Vcc, Vdd switched

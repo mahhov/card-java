@@ -1,0 +1,41 @@
+<div id="myDiv">this is my div</div>
+<button onclick="(httpGet())">http request</button></br>
+<button onclick="(httpPost())">http post</button></br>
+<input id="newName" placeholder="type a new name"></input></br>
+<script type="text/javascript">
+	
+	function httpPost() {
+		xx = document.getElementById("newName").value; 
+		
+		var xmlHttp = new XMLHttpRequest();
+		xmlHttp.open("POST", "http://mhlaptop.gateway.pace.com/write.php", true);
+        xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		xmlHttp.send("name="+xx);
+		
+		document.getElementById("myDiv").innerHTML = "posted: "+xx;
+	}
+	
+	
+	function httpGet() {
+		document.getElementById("myDiv").innerHTML="i have sent a message";
+		var xmlHttp = new XMLHttpRequest();
+
+		xmlHttp.onreadystatechange=function() {
+			if (xmlHttp.readyState == 4) {
+				var parser = new DOMParser();
+				var response = xmlHttp.response;
+				var x = parser.parseFromString(response, "application/xml");		
+				
+				var xx = x.getElementsByTagName("person")[0].getElementsByTagName("name")[0].childNodes[0].nodeValue;
+				
+				document.getElementById("myDiv").innerHTML = "recieved: "+xx;
+			}
+		}
+		
+		//xmlHttp.onreadystatechange = ProcessRequest;
+
+		xmlHttp.open("GET", "http://mhlaptop.gateway.pace.com/data.xml", true);
+		xmlHttp.send();
+	}
+
+</script>

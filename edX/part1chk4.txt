@@ -1,0 +1,4 @@
+-5_ 0_ done
+0_ 0_ Vin not connected to inputs
+1_ 0_ connected Vin to Vout pin
+0_ 1_ connected Vin to V+ pin

@@ -1,0 +1,3 @@
+-0.5_ 0_ done
+-2_ 0_ feedback and source resistors switched
+-5_ 1_ feedback connected to V-

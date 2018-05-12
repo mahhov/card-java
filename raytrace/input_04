@@ -1,0 +1,25 @@
+// COW
+
+// see input_01 for better comments on input format
+
+reflection 0
+
+object input_04.obj
+
+ka .1 .1 .0
+kd 1 1 0
+ks .8 .8 .8
+sp 1
+ref 0
+
+flip 0
+
+// pos dir yup vx vy
+camera 0 10 20 0 -1 -2 y 1.23 1.23
+
+// p d 
+light 1 0
+
+pointlight -100 300 200 .6 .6 .6
+
+out a_04 500 500

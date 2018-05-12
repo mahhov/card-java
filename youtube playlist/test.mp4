@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Refresh" content="60; URL=/xslt?PAGE=HURL14" />
+    <title>Broadband Link - Error</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" title="Main" href="/css/basic.css" />
+    <link rel="stylesheet" type="text/css" title="Main" href="/css/tabs.css" />
+    <link rel="stylesheet" type="text/css" title="Main" href="/css/hurl.css" />
+  </head>
+  <body>
+    <div id="container">
+      <div id="logo_uverse"></div>
+      <div id="header"></div>
+      <div id="main">
+        <div id="outercontainer">
+          <div id="header2"></div>
+          <div id="innercontainer">
+            <div id="contents">
+              <p class="warning">WARNING: Broadband service is not available (Message ID: NAD-2302)</p>
+              <p>The Pace 5031NV-030 gateway could not connect to your Broadband service.</p>
+              <p>This can occur due to emergency network maintenance or other unforeseen temporary service disruptions. The Service LED light on the front of the system will automatically turn green once the problem has been resolved, typically within a short period.</p>
+              <p>If this condition persists for more than 15 minutes, please contact the AT&amp;T Help Desk at 1-800-288-2020.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
